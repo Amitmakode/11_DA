@@ -1,0 +1,139 @@
+create database indexx ;
+
+use indexx ;
+
+CREATE TABLE employees (
+    emp_id INT PRIMARY KEY,
+    emp_name VARCHAR(100),
+    emp_department VARCHAR(100),
+    emp_salary DECIMAL(10, 2)
+);
+
+
+INSERT INTO employees (emp_id, emp_name, emp_department, emp_salary) VALUES
+(1, 'John Doe', 'Sales', 55000.00),
+(2, 'Jane Smith', 'Marketing', 60000.00),
+(3, 'Michael Johnson', 'IT', 65000.00),
+(4, 'Emily Davis', 'HR', 50000.00),
+(5, 'David Brown', 'Finance', 70000.00),
+(6, 'Jessica Wilson', 'Sales', 58000.00),
+(7, 'Daniel Martinez', 'IT', 62000.00),
+(8, 'Sarah Taylor', 'Marketing', 59000.00),
+(9, 'Kevin Anderson', 'Finance', 68000.00),
+(10, 'Rachel Garcia', 'HR', 51000.00);
+
+describe employees ;
+
+show index from employees ;
+
+CREATE INDEX idx_emp_name ON employees(emp_name);
+
+CREATE INDEX idx_emp_department ON employees(emp_department);
+
+
+SELECT * FROM employees WHERE emp_name = 'John Doe';
+
+CREATE TABLE orders (
+    order_id INT PRIMARY KEY,
+    customer_id INT,
+    order_date DATE,
+    total_amount DECIMAL(10, 2)
+);
+
+
+
+INSERT INTO orders (order_id, customer_id, order_date, total_amount) VALUES
+(1, 101, '2024-06-24', 150.75),
+(2, 102, '2024-06-23', 230.50),
+(3, 103, '2024-06-22', 75.25),
+(4, 104, '2024-06-21', 420.00),
+(5, 105, '2024-06-20', 320.75),
+(6, 106, '2024-06-19', 150.00),
+(7, 107, '2024-06-18', 200.50),
+(8, 108, '2024-06-17', 180.25),
+(9, 109, '2024-06-16', 90.80),
+(10, 110, '2024-06-15', 500.00);
+
+select * from orders where customer_id = 110 ;
+
+show index from orders ;
+
+CREATE INDEX idx_customer_order_date ON orders(customer_id, order_date);
+
+
+SELECT * FROM orders WHERE customer_id = 110 AND order_date = '2024-06-15';
+
+
+create table if not exists course (
+course_id int ,
+course_name varchar(50),
+course_desc varchar(60),
+course_tag varchar(50),
+index(course_id)
+) ;
+
+show index from course ;
+
+insert into course values(101 , 'fsda' , 'full stack data analytics' , 'Analytics'),
+(102 , 'fsds' , 'full stack data analytics' , 'Analytics'),
+(103 , 'fsds' , 'full stack data science' , 'DS'),
+(104 , 'big data' , 'full stack big data' , 'BD'),
+(105 , 'mern' , 'web dev' , 'mern'),
+(106 , 'blockchain' , 'full stack blockchain' , 'BC'),
+(101 , 'java' , 'full stack java' , 'java'),
+(102 , 'testing' , 'full testing ' , 'testing '),
+(105 , 'cybersecurity' , 'full stack cybersecurity' , 'cybersecurity'),
+(109 , 'c' , 'c language' , 'c'),
+(108 , 'c++' , 'C++ language' , 'language') ;
+
+
+select * from course ;
+
+select * from course where course_id = 101 ;
+
+create table if not exists course1 (
+course_id int primary key,
+course_name varchar(50),
+course_desc varchar(60),
+course_tag varchar(50),
+index(course_desc, course_name)
+) ;
+
+
+show index from course1 ;
+
+
+
+create table if not exists course2 (
+course_id int ,
+course_name varchar(50),
+course_desc varchar(60),
+course_tag varchar(50),
+index(course_name)
+) ;
+
+show index from course2 ;
+
+
+alter table course2
+add constraint primary key(course_id) ;
+
+
+alter table course2
+modify course_tag varchar(20) not null default "unkown" ;
+
+
+describe course2 ;
+
+alter table course2
+add index(course_desc) ;
+
+
+
+
+
+
+
+
+
+
